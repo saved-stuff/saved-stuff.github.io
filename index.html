@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bookmarks Plus</title>
+        <link rel="icon" href="icon.png" type="image/x-icon" />
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <div class="container">
+            <header class="header">
+                <div class="logo-container">
+                    <a
+                        href="https://github.com/Madhav-MKNC/bookmarks-plus"
+                        target="_blank"
+                        class="logo"
+                        aria-label="GitHub Repository"
+                    >
+                        <h1>Bookmarks Plus</h1>
+                    </a>
+
+                    <button id="load-file-btn">Load File</button>
+                </div>
+                <div class="search-container">
+                    <input
+                        type="text"
+                        id="search-term"
+                        placeholder="Search bookmarks..."
+                    />
+                    <select id="category-filter"></select>
+                    <button id="add-bookmark-btn">+ Add Bookmark</button>
+                </div>
+            </header>
+            <main class="main">
+                <div id="bookmarks-container" class="bookmarks-container"></div>
+            </main>
+            <!-- <footer class="footer">
+                <p>© 2023 Bookmarks Plus. All rights reserved.</p>
+            </footer> -->
+        </div>
+        <script src="save-to-file.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
