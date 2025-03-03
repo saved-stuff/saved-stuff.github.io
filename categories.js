@@ -1,4 +1,9 @@
-const categories = JSON.parse(localStorage.getItem('bookmarks-categories')) || [];
+const storedBookmarks_temp = JSON.parse(localStorage.getItem('bookmarks')) || [];
+const storedCategories_temp = JSON.parse(localStorage.getItem('bookmarks-categories')) || [];
+const categories_updated = [...new Set([...storedBookmarks_temp.map(bookmark => bookmark.category), ...storedCategories_temp])];
+localStorage.setItem('bookmarks-categories-current', JSON.stringify(categories_updated));
+
+const categories = JSON.parse(localStorage.getItem('bookmarks-categories-current')) || [];
 
 const categoryInput = document.getElementById('category');
 // const dropdownList = document.getElementById('dropdownList');

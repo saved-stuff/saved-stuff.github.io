@@ -80,18 +80,20 @@ function saveBookmarksToTimestampedFile() {
             bookmarks: JSON.parse(newData),
         };
 
-        const timestampedFilename = `bookmarks_${Timestamp}.json`;
-        const blob = new Blob([JSON.stringify(fileContent, null, 2)], { type: 'application/json' });
-        const link = document.createElement('a');
+        const timestampedFilename = `bookmarks-plus-storage/bookmarks_${Timestamp}.json`;
+        const blob = new Blob([JSON.stringify(fileContent)], { type: 'application/json' });
+        const timestampedUrl = URL.createObjectURL(blob);
 
-        link.href = URL.createObjectURL(blob);
-        link.download = timestampedFilename;
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        console.log(`✅ Timestamped data saved as ${timestampedFilename}`);
+        chrome.downloads.download({
+            url: timestampedUrl,
+            filename: timestampedFilename
+        }, (downloadId) => {
+            if (chrome.runtime.lastError) {
+                console.log("⚠️ Error during download:", chrome.runtime.lastError.message);
+            } else {
+                console.log(`✅ Timestamped data saved as ${timestampedFilename}`);
+            }
+        });
     } catch (e) {
         console.log("⚠️ Error saving bookmarks to file:", e);
     }

@@ -16,6 +16,13 @@ const bookmarksContainer = document.getElementById("bookmarks-container");
 const searchTermInput = document.getElementById("search-term");
 const categoryFilter = document.getElementById("category-filter");
 
+const badgeContainer = document.querySelector(".bookmark-count-badge");
+
+function updateBadge(count) {
+    badgeContainer.textContent = `Bookmarks Found: ${count}`;
+    badgeContainer.style.display = count > 0 ? "block" : "none";
+}
+
 function renderBookmarks(filteredBookmarks) {
     bookmarksContainer.innerHTML = "";
     filteredBookmarks.forEach((bookmark) => {
@@ -34,13 +41,15 @@ function renderBookmarks(filteredBookmarks) {
                     <div class="blocks">${blocksHtml}</div>
                     ${bookmark.notes ? `<p class="bookmark-notes bookmark-card-item">${bookmark.notes}</p>` : ""}
                 </div>
-                <button class="view-btn"><img src="open.png" alt=""></button>
+                <button class="view-btn"><img src="../assets/open.png" alt=""></button>
                 `;
             bookmarksContainer.appendChild(bookmarkElement);
         } catch (error) {
             console.log('⚠️ Error rendering bookmark:', error.message);
         }
     });
+
+    updateBadge(filteredBookmarks.length);
 
     const viewButtons = bookmarksContainer.querySelectorAll(".view-btn");
     viewButtons.forEach((button) => {
